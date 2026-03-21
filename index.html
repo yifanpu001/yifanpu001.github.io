@@ -1,2 +1,579 @@
-Hi there! This is Yifan Pu. <br>
-My website is under construction and will be completed soon.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yifan Pu - Tsinghua University</title>
+  <meta name="description" content="Yifan Pu is a PhD student at Tsinghua University working on computer vision and deep learning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #fafafa;
+      --color-text: #1a1a2e;
+      --color-text-secondary: #555;
+      --color-accent: #2563eb;
+      --color-accent-light: #dbeafe;
+      --color-border: #e5e7eb;
+      --color-card: #ffffff;
+      --color-tag: #f1f5f9;
+      --max-width: 860px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- NAV --- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,250,250,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    nav .nav-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--color-text);
+    }
+    nav .nav-links a {
+      margin-left: 28px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      transition: color 0.2s;
+    }
+    nav .nav-links a:hover {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* --- HERO / BIO --- */
+    .hero {
+      padding: 56px 0 40px;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+    .hero-photo {
+      flex-shrink: 0;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      overflow: hidden;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-info h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+    }
+    .hero-info .subtitle {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+    .hero-info p {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .hero-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      transition: all 0.2s;
+    }
+    .hero-links a:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+    }
+    .hero-links a svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* --- SECTIONS --- */
+    section { padding: 36px 0; }
+    section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--color-text);
+      display: inline-block;
+    }
+
+    /* --- NEWS --- */
+    .news-list { list-style: none; }
+    .news-list li {
+      display: flex;
+      gap: 16px;
+      padding: 8px 0;
+      font-size: 14.5px;
+    }
+    .news-list .date {
+      flex-shrink: 0;
+      width: 90px;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* --- PUBLICATIONS --- */
+    .pub-year {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin: 28px 0 14px;
+    }
+    .pub-year:first-of-type { margin-top: 0; }
+
+    .pub-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .pub-item:last-child { border-bottom: none; }
+
+    .pub-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+    .pub-authors {
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+    .pub-authors .me {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .pub-venue {
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+    }
+    .pub-venue .venue-name {
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+    .pub-links {
+      margin-top: 6px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pub-links a {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 4px;
+      background: var(--color-tag);
+      color: var(--color-text-secondary);
+      transition: all 0.2s;
+    }
+    .pub-links a:hover {
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .equal-note {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .pub-section-label {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: 2px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    /* --- AWARDS --- */
+    .awards-list { list-style: none; }
+    .awards-list li {
+      display: flex;
+      gap: 16px;
+      padding: 6px 0;
+      font-size: 14.5px;
+    }
+    .awards-list .year {
+      flex-shrink: 0;
+      width: 50px;
+      font-weight: 600;
+      color: var(--color-text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* --- EDUCATION --- */
+    .edu-item {
+      display: flex;
+      gap: 20px;
+      padding: 10px 0;
+    }
+    .edu-year {
+      flex-shrink: 0;
+      width: 120px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+    .edu-detail h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .edu-detail p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      padding: 32px 0;
+      margin-top: 20px;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 640px) {
+      .hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+      }
+      .hero-photo { width: 140px; height: 140px; font-size: 44px; }
+      .hero-links { justify-content: center; }
+      .hero-info h1 { font-size: 26px; }
+      nav .nav-links a { margin-left: 16px; font-size: 13px; }
+      .news-list li { flex-direction: column; gap: 2px; }
+      .news-list .date { width: auto; }
+      .edu-item { flex-direction: column; gap: 4px; }
+      .edu-year { width: auto; }
+      .awards-list li { flex-direction: column; gap: 2px; }
+      .awards-list .year { width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="nav-name">Yifan Pu</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#publications">Publications</a>
+      <a href="#awards">Awards</a>
+      <a href="#education">Education</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div class="hero-photo">
+      <!-- Replace the "YP" below with: <img src="photo.jpg" alt="Yifan Pu"> -->
+      YP
+    </div>
+    <div class="hero-info">
+      <h1>Yifan Pu <span style="font-size:20px;font-weight:400;color:var(--color-text-secondary);">/ 浦一凡</span></h1>
+      <div class="subtitle">Ph.D. Student, Tsinghua University</div>
+      <p>
+        I am a Ph.D. student at the
+        <a href="https://www.sigs.tsinghua.edu.cn/" target="_blank">Shenzhen International Graduate School</a>,
+        Tsinghua University, advised by
+        <a href="https://www.sigs.tsinghua.edu.cn/lx/main.htm" target="_blank">Prof. Xiu Li</a>.
+        I received my B.Eng. degree from Beihang University in 2020.
+      </p>
+      <p>
+        My research focuses on <strong>computer vision</strong> and <strong>deep learning</strong>,
+        with emphasis on neural network architecture design, visual attention mechanisms,
+        object detection, and image generation.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:pyf22@mails.tsinghua.edu.cn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email
+        </a>
+        <a href="https://scholar.google.com/citations?user=PLACEHOLDER" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+          Google Scholar
+        </a>
+        <a href="https://github.com/yifanpu001" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <h2>News</h2>
+    <ul class="news-list">
+      <li>
+        <span class="date">2025.09</span>
+        <span>One paper accepted to <strong>NeurIPS 2025</strong>: Visual Contrast Attention (VCA).</span>
+      </li>
+      <li>
+        <span class="date">2025.02</span>
+        <span>One paper accepted to <strong>CVPR 2025</strong>: ART for multi-layer transparent image generation.</span>
+      </li>
+      <li>
+        <span class="date">2025</span>
+        <span>Awarded the <strong>National Scholarship</strong> for PhD students.</span>
+      </li>
+      <li>
+        <span class="date">2024.07</span>
+        <span>One paper accepted to <strong>ECCV 2024</strong>: Attention Mediators for efficient diffusion transformers.</span>
+      </li>
+      <li>
+        <span class="date">2024</span>
+        <span>Selected as <strong>Stars of Tomorrow</strong> intern at Microsoft Research Asia.</span>
+      </li>
+      <li>
+        <span class="date">2024.01</span>
+        <span>One paper accepted to <strong>IEEE TIP</strong>: Learnable Semantic Data Augmentation for fine-grained recognition.</span>
+      </li>
+      <li>
+        <span class="date">2023.09</span>
+        <span>Two papers accepted to <strong>NeurIPS 2023</strong>: Rank-DETR and Latency-aware Dynamic Networks.</span>
+      </li>
+      <li>
+        <span class="date">2023.07</span>
+        <span>One paper accepted to <strong>ICCV 2023</strong>: Adaptive Rotated Convolution (ARC).</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <h2>Selected Publications</h2>
+    <p class="equal-note">* denotes equal contribution.</p>
+
+    <div class="pub-section-label">First Author</div>
+
+    <div class="pub-item">
+      <div class="pub-title">Linear Differential Vision Transformer: Learning Visual Contrasts via Pairwise Differentials</div>
+      <div class="pub-authors"><span class="me">Yifan Pu</span>*, Jiayi Ying*, Tao Ye, et al.</div>
+      <div class="pub-venue"><span class="venue-name">NeurIPS 2025</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">ART: Anonymous Region Transformer for Variable Multi-Layer Transparent Image Generation</div>
+      <div class="pub-authors"><span class="me">Yifan Pu</span>*, Yiming Zhao*, Zhen Tang, et al.</div>
+      <div class="pub-venue"><span class="venue-name">CVPR 2025</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Efficient Diffusion Transformer with Step-wise Dynamic Attention Mediators</div>
+      <div class="pub-authors"><span class="me">Yifan Pu</span>*, Zhuofan Xia*, Jiayi Guo*, et al.</div>
+      <div class="pub-venue"><span class="venue-name">ECCV 2024</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Fine-grained Recognition with Learnable Semantic Data Augmentation</div>
+      <div class="pub-authors"><span class="me">Yifan Pu</span>*, Yizeng Han*, Yulin Wang, et al.</div>
+      <div class="pub-venue"><span class="venue-name">IEEE Transactions on Image Processing (TIP)</span>, 2024</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Rank-DETR for High Quality Object Detection</div>
+      <div class="pub-authors"><span class="me">Yifan Pu</span>*, Weicong Liang*, Yiduo Hao*, et al.</div>
+      <div class="pub-venue"><span class="venue-name">NeurIPS 2023</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Adaptive Rotated Convolution for Rotated Object Detection</div>
+      <div class="pub-authors"><span class="me">Yifan Pu</span>*, Yulin Wang*, Zhuofan Xia, et al.</div>
+      <div class="pub-venue"><span class="venue-name">ICCV 2023</span></div>
+    </div>
+
+    <br>
+    <div class="pub-section-label">Co-First Author</div>
+
+    <div class="pub-item">
+      <div class="pub-title">Bridging the Divide: Reconsidering Softmax and Linear Attention</div>
+      <div class="pub-authors">Dongchen Han*, <span class="me">Yifan Pu</span>*, Zhuofan Xia, et al.</div>
+      <div class="pub-venue"><span class="venue-name">NeurIPS 2024</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">GRA: Detecting Oriented Objects through Group-wise Rotating and Attention</div>
+      <div class="pub-authors">Jiangshan Wang*, <span class="me">Yifan Pu</span>*, Yizeng Han, et al.</div>
+      <div class="pub-venue"><span class="venue-name">ECCV 2024</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Latency-aware Spatial-wise Dynamic Networks</div>
+      <div class="pub-authors">Yizeng Han*, Zhihang Yuan*, <span class="me">Yifan Pu</span>*, et al.</div>
+      <div class="pub-venue"><span class="venue-name">NeurIPS 2022</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Learning to Weight Samples for Dynamic Early-Exiting Networks</div>
+      <div class="pub-authors">Yizeng Han*, <span class="me">Yifan Pu</span>*, Zihang Lai, et al.</div>
+      <div class="pub-venue"><span class="venue-name">ECCV 2022</span></div>
+    </div>
+
+    <br>
+    <div class="pub-section-label">Selected Co-authored Papers</div>
+
+    <div class="pub-item">
+      <div class="pub-title">Emulating Human-like Adaptive Vision for Efficient and Flexible Machine Visual Perception</div>
+      <div class="pub-authors">Yulin Wang, Yuyu Yue, ..., <span class="me">Yifan Pu</span>, et al.</div>
+      <div class="pub-venue"><span class="venue-name">Nature Machine Intelligence</span>, 2025</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Masked Region Transformer for Layered Image Generation and Editing at Scale</div>
+      <div class="pub-authors">Zhen Tang, Jinheng Chen, ..., <span class="me">Yifan Pu</span>, et al.</div>
+      <div class="pub-venue"><span class="venue-name">CVPR 2026</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Latency-aware Unified Dynamic Networks for Efficient Image Recognition</div>
+      <div class="pub-authors">Yizeng Han*, Zeyu Liu*, Zhihang Yuan*, <span class="me">Yifan Pu</span>, et al.</div>
+      <div class="pub-venue"><span class="venue-name">IEEE TPAMI</span>, 2024</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Smooth Diffusion: Crafting Smooth Latent Spaces in Diffusion Models</div>
+      <div class="pub-authors">Jiayi Guo*, Xingqian Xu*, <span class="me">Yifan Pu</span>, et al.</div>
+      <div class="pub-venue"><span class="venue-name">CVPR 2024</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Demystify Mamba in Vision: A Linear Attention Perspective</div>
+      <div class="pub-authors">Dongchen Han, Ziyi Wang, Zhuofan Xia, Yizeng Han, <span class="me">Yifan Pu</span>, et al.</div>
+      <div class="pub-venue"><span class="venue-name">NeurIPS 2024</span></div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Dynamic Perceiver for Efficient Visual Recognition</div>
+      <div class="pub-authors">Yizeng Han*, Dongchen Han*, Zeyu Liu, Yulin Wang, Xuran Pan, <span class="me">Yifan Pu</span>, et al.</div>
+      <div class="pub-venue"><span class="venue-name">ICCV 2023</span></div>
+    </div>
+
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <h2>Awards</h2>
+    <ul class="awards-list">
+      <li><span class="year">2025</span><span>National Scholarship for PhD Students</span></li>
+      <li><span class="year">2025</span><span>CVPR 2025 Travel Award</span></li>
+      <li><span class="year">2024</span><span>Stars of Tomorrow Intern, Microsoft Research Asia</span></li>
+      <li><span class="year">2024</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
+      <li><span class="year">2023</span><span>Low Power Computer Vision Challenge, <strong>1st Place</strong></span></li>
+      <li><span class="year">2023</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
+      <li><span class="year">2022</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
+    </ul>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="edu-item">
+      <div class="edu-year">2023 &ndash; Present</div>
+      <div class="edu-detail">
+        <h3>Tsinghua University</h3>
+        <p>Ph.D. in Control Science and Engineering, Shenzhen International Graduate School</p>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2020 &ndash; 2023</div>
+      <div class="edu-detail">
+        <h3>Tsinghua University</h3>
+        <p>M.S. in Control Science and Engineering, Dept. of Automation</p>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2016 &ndash; 2020</div>
+      <div class="edu-detail">
+        <h3>Beihang University (BUAA)</h3>
+        <p>B.Eng. in Automation</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    &copy; 2025 Yifan Pu &middot; Last updated March 2025
+  </div>
+</footer>
+
+</body>
+</html>
