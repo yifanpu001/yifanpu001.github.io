@@ -236,19 +236,33 @@
 
     .project-item {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 16px;
     }
     .project-logo {
-      flex: 0 0 72px;
-      margin-top: 3px;
+      flex: 0 0 136px;
+      line-height: 0;
     }
     .project-logo img {
       display: block;
-      width: 72px;
-      height: auto;
+      width: 136px;
+      height: 71px;
+      object-fit: cover;
+      border-radius: 8px;
     }
     .project-body { min-width: 0; }
+    .project-title {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .project-org {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
 
     .equal-note {
       font-size: 13px;
@@ -349,8 +363,8 @@
       .edu-year { width: auto; }
       .awards-list li { flex-direction: column; gap: 2px; }
       .awards-list .year { width: auto; }
-      .project-logo { flex-basis: 60px; }
-      .project-logo img { width: 60px; }
+      .project-logo { flex-basis: 96px; }
+      .project-logo img { width: 96px; height: 50px; }
     }
   </style>
 </head>
@@ -400,13 +414,13 @@
     <h2>Projects</h2>
     <div class="pub-item project-item">
       <a class="project-logo" href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">
-        <img src="canva-logo.svg" alt="Canva">
+        <img src="magic-layers.jpg" alt="Magic Layers">
       </a>
       <div class="project-body">
-        <div class="pub-title">
+        <div class="pub-title project-title">
           <a href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">Magic Layers</a>
+          <span class="project-org">Canva</span>
         </div>
-        <div class="pub-venue"><span class="venue-name">Canva</span></div>
         <div class="pub-authors">
           Turns a flat design into an editable layered layout, so text, objects, and colors can be changed without regenerating the image. Contributed during my internship at Canva CORE.
         </div>
