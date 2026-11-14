@@ -147,7 +147,7 @@
     }
 
     /* --- SECTIONS --- */
-    section { padding: 36px 0; }
+    section { padding: 36px 0; scroll-margin-top: 72px; }
     section h2 {
       font-size: 22px;
       font-weight: 700;
@@ -233,6 +233,22 @@
       color: var(--color-accent);
       text-decoration: none;
     }
+
+    .project-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .project-logo {
+      flex: 0 0 72px;
+      margin-top: 3px;
+    }
+    .project-logo img {
+      display: block;
+      width: 72px;
+      height: auto;
+    }
+    .project-body { min-width: 0; }
 
     .equal-note {
       font-size: 13px;
@@ -333,6 +349,8 @@
       .edu-year { width: auto; }
       .awards-list li { flex-direction: column; gap: 2px; }
       .awards-list .year { width: auto; }
+      .project-logo { flex-basis: 60px; }
+      .project-logo img { width: 60px; }
     }
   </style>
 </head>
@@ -380,16 +398,21 @@
   <!-- PROJECTS -->
   <section id="projects">
     <h2>Projects</h2>
-    <div class="pub-item">
-      <div class="pub-title">
-        <a href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">Magic Layers</a>
-      </div>
-      <div class="pub-venue"><span class="venue-name">Canva</span> · Beta</div>
-      <div class="pub-authors">
-        Turns a flat design into an editable layered layout, so text, objects, and colors can be changed without regenerating the image. Contributed during my internship at Canva CORE.
-      </div>
-      <div class="pub-links">
-        <a href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">Project</a>
+    <div class="pub-item project-item">
+      <a class="project-logo" href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">
+        <img src="canva-logo.svg" alt="Canva">
+      </a>
+      <div class="project-body">
+        <div class="pub-title">
+          <a href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">Magic Layers</a>
+        </div>
+        <div class="pub-venue"><span class="venue-name">Canva</span> · Beta</div>
+        <div class="pub-authors">
+          Turns a flat design into an editable layered layout, so text, objects, and colors can be changed without regenerating the image. Contributed during my internship at Canva CORE.
+        </div>
+        <div class="pub-links">
+          <a href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">Project</a>
+        </div>
       </div>
     </div>
   </section>
