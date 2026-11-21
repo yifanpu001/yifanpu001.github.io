@@ -1,532 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yifan Pu - Token Foundry, Alibaba</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yifan Pu · Alibaba Token Hub</title>
   <meta name="description" content="Yifan Pu is a Member of Technical Staff at Token Foundry, Alibaba Token Hub, and received a Ph.D. from LeapLab at Tsinghua University in 2026. Research focuses on pretraining video foundation models, especially Reference-to-Video generation.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://yifanpu001.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg: #fafafa;
-      --color-text: #1a1a2e;
-      --color-text-secondary: #555;
-      --color-accent: #2563eb;
-      --color-accent-light: #dbeafe;
-      --color-border: #e5e7eb;
-      --color-card: #ffffff;
-      --color-tag: #f1f5f9;
-      --max-width: 860px;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      --bg: #ffffff;
+      --surface: #f6f7f9;
+      --text: #16191d;
+      --text-2: #464d59;
+      --muted: #6b7280;
+      --rule: #e6e8ec;
+      --accent: #1f4f99;
+      --accent-strong: #163c78;
+      --page-max: 760px;
+      --fs: 16px;
+      --lh: 1.65;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1115;
+        --surface: #161a20;
+        --text: #e7e9ec;
+        --text-2: #b4bac4;
+        --muted: #8a919d;
+        --rule: #262b33;
+        --accent: #8db2f5;
+        --accent-strong: #b3cbf8;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-padding-top: 76px; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.7;
-      font-size: 15px;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: var(--fs);
+      line-height: var(--lh);
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: var(--color-accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+    p { margin: 0; }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3 { color: var(--text); }
+    strong { font-weight: 600; }
 
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* --- NAV --- */
-    nav {
+    .topbar {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(250,250,250,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-border);
+      z-index: 10;
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: saturate(1.5) blur(12px);
+      border-bottom: 1px solid var(--rule);
     }
-    nav .container {
+    .topbar-inner {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 56px;
+      gap: 16px;
     }
-    nav .nav-name {
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--color-text);
-    }
-    nav .nav-links a {
-      margin-left: 28px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-text-secondary);
-      transition: color 0.2s;
-    }
-    nav .nav-links a:hover {
-      color: var(--color-accent);
-      text-decoration: none;
-    }
-
-    /* --- HERO / BIO --- */
-    .hero {
-      padding: 56px 0 40px;
-      display: flex;
-      gap: 48px;
-      align-items: flex-start;
-    }
-    .hero-photo {
-      flex-shrink: 0;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 56px;
-      font-weight: 700;
-      letter-spacing: -2px;
-      overflow: hidden;
-    }
-    .hero-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .hero-info h1 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      letter-spacing: -0.5px;
-    }
-    .hero-info .subtitle {
-      font-size: 16px;
-      color: var(--color-text-secondary);
-      margin-bottom: 16px;
-    }
-    .hero-info p {
-      color: var(--color-text-secondary);
+    .brand { color: var(--text); font-weight: 600; letter-spacing: -0.01em; }
+    .brand:hover { color: var(--text); text-decoration: none; }
+    .nav { display: flex; align-items: center; gap: 2px; }
+    .nav a {
+      color: var(--text-2);
       font-size: 15px;
-      margin-bottom: 10px;
-    }
-    .hero-links {
-      display: flex;
-      gap: 16px;
-      margin-top: 18px;
-      flex-wrap: wrap;
-    }
-    .hero-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 6px 14px;
+      padding: 6px 10px;
       border-radius: 8px;
-      background: var(--color-card);
-      border: 1px solid var(--color-border);
-      color: var(--color-text);
-      transition: all 0.2s;
     }
-    .hero-links a:hover {
-      border-color: var(--color-accent);
-      color: var(--color-accent);
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(37,99,235,0.08);
-    }
-    .hero-links a svg {
-      width: 16px;
-      height: 16px;
-    }
+    .nav a:hover { color: var(--text); background: var(--surface); text-decoration: none; }
 
-    /* --- SECTIONS --- */
-    section { padding: 36px 0; scroll-margin-top: 72px; }
-    section h2 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      letter-spacing: -0.3px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--color-text);
-      display: inline-block;
-    }
+    .layout { max-width: var(--page-max); margin: 0 auto; padding: 56px 24px 24px; }
 
-    /* --- NEWS --- */
-    .news-list { list-style: none; }
-    .news-list li {
+    .profile { margin-bottom: 32px; }
+    .name { margin: 0; font-size: 32px; line-height: 1.2; font-weight: 650; letter-spacing: -0.02em; }
+    .alt-name { margin-left: 8px; font-size: 20px; font-weight: 500; color: var(--muted); }
+    .role { margin: 6px 0 14px; color: var(--text-2); font-size: 16.5px; }
+    .contact {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       display: flex;
-      gap: 16px;
-      padding: 8px 0;
-      font-size: 14.5px;
-    }
-    .news-list .date {
-      flex-shrink: 0;
-      width: 90px;
-      color: var(--color-text-secondary);
-      font-weight: 500;
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* --- PUBLICATIONS --- */
-    .pub-year {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin: 28px 0 14px;
-    }
-    .pub-year:first-of-type { margin-top: 0; }
-
-    .pub-item {
-      padding: 14px 0;
-      border-bottom: 1px solid var(--color-border);
-    }
-    .pub-item:last-child { border-bottom: none; }
-
-    .pub-title {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 15.5px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 4px;
-    }
-    .pub-authors {
-      font-size: 13.5px;
-      color: var(--color-text-secondary);
-      margin-bottom: 4px;
-    }
-    .pub-authors .me {
-      font-weight: 600;
-      color: var(--color-text);
-    }
-    .pub-venue {
-      font-size: 13.5px;
-      color: var(--color-text-secondary);
-    }
-    .pub-venue .venue-name {
-      font-weight: 600;
-      color: var(--color-accent);
-    }
-    .pub-links {
-      margin-top: 6px;
-      display: flex;
-      gap: 8px;
       flex-wrap: wrap;
+      gap: 6px 20px;
+      font-size: 15px;
     }
-    .pub-links a {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 2px 10px;
-      border-radius: 4px;
-      background: var(--color-tag);
-      color: var(--color-text-secondary);
-      transition: all 0.2s;
-    }
-    .pub-links a:hover {
-      background: var(--color-accent-light);
-      color: var(--color-accent);
-      text-decoration: none;
-    }
+    .contact a { display: inline-flex; align-items: center; gap: 7px; color: var(--text-2); }
+    .contact a:hover { color: var(--accent); text-decoration: none; }
+    .contact svg { width: 16px; height: 16px; flex: none; }
 
-    .project-item {
+    .bio p { font-size: 16.5px; }
+    .bio p + p { margin-top: 12px; }
+    .bio a {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    }
+    .bio a:hover { text-decoration-color: currentColor; }
+
+    .section { margin-top: 52px; }
+    .section h2 { margin: 0 0 16px; font-size: 20px; line-height: 1.3; font-weight: 650; letter-spacing: -0.01em; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+    .section-head h2 { margin: 0; }
+    .more { font-size: 15px; white-space: nowrap; }
+    .section-note { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+
+    .group {
+      margin: 22px 0 0;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--text-2);
+    }
+    .group:first-of-type { margin-top: 8px; }
+
+    .pub { padding: 14px 0; border-top: 1px solid var(--rule); }
+    .pub-list > .pub:first-child { border-top: 0; }
+    .pub-title { margin: 0 0 3px; font-size: 16px; line-height: 1.4; font-weight: 600; letter-spacing: -0.005em; }
+    .pub-authors { color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
+    .pub-authors .me { color: var(--text); font-weight: 600; }
+    .pub-meta { margin-top: 5px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 14px; }
+    .venue { color: var(--text); font-weight: 600; }
+    .pub-links { display: inline-flex; flex-wrap: wrap; gap: 2px 14px; margin-left: 4px; font-weight: 500; }
+    .pub-links::before { content: "·"; color: var(--muted); margin-right: -4px; font-weight: 400; }
+
+    .project {
       display: flex;
       align-items: center;
       gap: 16px;
+      padding: 4px 0 2px;
     }
-    .project-logo {
+    .project-thumb {
       flex: 0 0 136px;
       line-height: 0;
     }
-    .project-logo img {
-      display: block;
+    .project-thumb img {
       width: 136px;
       height: 71px;
       object-fit: cover;
       border-radius: 8px;
+      box-shadow: 0 0 0 1px var(--rule);
     }
-    .project-body { min-width: 0; }
     .project-title {
+      margin: 0 0 4px;
       display: flex;
       align-items: baseline;
-      gap: 10px;
       flex-wrap: wrap;
-    }
-    .project-org {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 14px;
+      gap: 8px;
+      font-size: 16px;
+      line-height: 1.4;
       font-weight: 600;
-      color: var(--color-accent);
     }
+    .project-title a { color: var(--text); }
+    .project-title a:hover { color: var(--accent); }
+    .project-org { font-size: 14px; font-weight: 600; color: var(--accent); }
+    .project-body p { color: var(--text-2); font-size: 14.5px; }
+    .project .pub-links { margin: 6px 0 0; }
+    .project .pub-links::before { content: none; }
 
-    .equal-note {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      margin-bottom: 16px;
-      font-style: italic;
-    }
-
-    .pub-section-label {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--color-accent);
-      background: var(--color-accent-light);
-      padding: 2px 10px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-    }
-
-    /* --- AWARDS --- */
-    .awards-list { list-style: none; }
-    .awards-list li {
-      display: flex;
+    .awards { list-style: none; margin: 0; padding: 0; }
+    .awards li {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
       gap: 16px;
       padding: 6px 0;
-      font-size: 14.5px;
     }
-    .awards-list .year {
-      flex-shrink: 0;
-      width: 50px;
-      font-weight: 600;
-      color: var(--color-text);
-      font-variant-numeric: tabular-nums;
-    }
+    .awards .year { color: var(--muted); font-size: 14.5px; font-variant-numeric: tabular-nums; }
 
-    /* --- EDUCATION --- */
-    .edu-item {
+    .footer { margin-top: 72px; border-top: 1px solid var(--rule); }
+    .footer-inner {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 20px 24px 36px;
       display: flex;
-      gap: 20px;
-      padding: 10px 0;
-    }
-    .edu-year {
-      flex-shrink: 0;
-      width: 120px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-text-secondary);
-      font-variant-numeric: tabular-nums;
-    }
-    .edu-detail h3 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .edu-detail p {
-      font-size: 14px;
-      color: var(--color-text-secondary);
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 24px;
+      color: var(--muted);
+      font-size: 13.5px;
     }
 
-    /* --- FOOTER --- */
-    footer {
-      padding: 32px 0;
-      margin-top: 20px;
-      border-top: 1px solid var(--color-border);
-      text-align: center;
-      font-size: 13px;
-      color: var(--color-text-secondary);
-    }
-
-    /* --- RESPONSIVE --- */
     @media (max-width: 640px) {
-      nav .container {
-        height: auto;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        gap: 8px 12px;
-      }
-      nav .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 4px 14px;
-      }
-      .hero {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 24px;
-      }
-      .hero-photo { width: 140px; height: 140px; font-size: 44px; }
-      .hero-links { justify-content: center; }
-      .hero-info h1 { font-size: 26px; }
-      nav .nav-links a { margin-left: 0; font-size: 13px; }
-      section { scroll-margin-top: 88px; }
-      .news-list li { flex-direction: column; gap: 2px; }
-      .news-list .date { width: auto; }
-      .edu-item { flex-direction: column; gap: 4px; }
-      .edu-year { width: auto; }
-      .awards-list li { flex-direction: column; gap: 2px; }
-      .awards-list .year { width: auto; }
-      .project-logo { flex-basis: 96px; }
-      .project-logo img { width: 96px; height: 50px; }
+      :root { --fs: 15.5px; }
+      .topbar-inner { padding: 0 16px; height: 52px; }
+      .nav a { padding: 6px 8px; font-size: 14.5px; }
+      .layout { padding: 32px 20px 16px; }
+      .name { font-size: 26px; }
+      .alt-name { display: block; margin: 2px 0 0; font-size: 16px; }
+      .section { margin-top: 40px; }
+      .bio p { font-size: 15.5px; }
+      .project { align-items: flex-start; }
+      .project-thumb { flex-basis: 104px; }
+      .project-thumb img { width: 104px; height: 54px; }
+      .awards li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .pub-links { flex-basis: 100%; margin-left: 0; }
+      .pub-links::before { content: none; }
     }
   </style>
 </head>
 <body>
-
-<nav>
-  <div class="container">
-    <a href="#" class="nav-name">Yifan Pu</a>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#publications">Publications</a>
-      <a href="#awards">Awards</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">Yifan Pu</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#about">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#awards">Awards</a>
+      </nav>
     </div>
-  </div>
-</nav>
+  </header>
 
-<main class="container">
+  <div class="layout">
+    <header class="profile" id="about">
+      <h1 class="name">Yifan Pu <span class="alt-name" lang="zh-CN">浦一凡</span></h1>
+      <p class="role">Member of Technical Staff · Token Foundry, Alibaba Token Hub</p>
+      <ul class="contact">
+        <li>
+          <a href="mailto:puyifan@tsinghua.edu.cn">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></svg>
+            <span>puyifan@tsinghua.edu.cn</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=oM9rnYQAAAAJ&hl=en">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+            <span>Google Scholar</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/yifanpu001">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            <span>GitHub</span>
+          </a>
+        </li>
+      </ul>
+    </header>
 
-  <!-- HERO -->
-  <section class="hero" id="about">
-    <div class="hero-info">
-      <h1>Yifan Pu <span style="font-size:20px;font-weight:400;color:var(--color-text-secondary);">/ 浦一凡</span></h1>
-      <div class="subtitle">Token Foundry, Alibaba Token Hub</div>
+    <section class="bio">
       <p>
         I am a Member of Technical Staff at <strong>Token Foundry, Alibaba Token Hub</strong>, working on <strong>video foundation model pretraining</strong>, with a primary focus on Reference-to-Video generation.
       </p>
       <p>
-        I received my Ph.D. from <a href="https://www.leaplab.ai/" target="_blank" rel="noopener noreferrer">LeapLab</a> at Tsinghua University in 2026. During my Ph.D., I interned at Microsoft Research Asia, Alibaba DAMO Academy, and Canva CORE.
+        I received my Ph.D. from <a href="https://www.leaplab.ai/">LeapLab</a> at Tsinghua University in 2026. During my Ph.D., I interned at Microsoft Research Asia, Alibaba DAMO Academy, and Canva CORE.
       </p>
-      <div class="hero-links">
-        <a href="https://scholar.google.com/citations?user=oM9rnYQAAAAJ&hl=en" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
-          Google Scholar
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+      <article class="project">
+        <a class="project-thumb" href="https://www.canva.com/magic-layers/">
+          <img src="magic-layers.jpg" alt="Magic Layers" width="640" height="335">
         </a>
-        <a href="https://github.com/yifanpu001" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
+        <div class="project-body">
+          <h3 class="project-title">
+            <a href="https://www.canva.com/magic-layers/">Magic Layers</a>
+            <span class="project-org">Canva</span>
+          </h3>
+          <p>Turns a flat design into an editable layered layout, so text, objects, and colors can be changed without regenerating the image. Contributed during my internship at Canva CORE.</p>
+          <p class="pub-links"><a href="https://www.canva.com/magic-layers/">Project</a></p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="publications" aria-labelledby="publications-heading">
+      <div class="section-head">
+        <h2 id="publications-heading">Selected Publications</h2>
+        <a class="more" href="https://scholar.google.com/citations?user=oM9rnYQAAAAJ&hl=en">Google Scholar →</a>
       </div>
-    </div>
-  </section>
+      <p class="section-note">* denotes equal contribution.</p>
 
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="pub-item project-item">
-      <a class="project-logo" href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">
-        <img src="magic-layers.jpg" alt="Magic Layers">
-      </a>
-      <div class="project-body">
-        <div class="pub-title project-title">
-          <a href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">Magic Layers</a>
-          <span class="project-org">Canva</span>
-        </div>
-        <div class="pub-authors">
-          Turns a flat design into an editable layered layout, so text, objects, and colors can be changed without regenerating the image. Contributed during my internship at Canva CORE.
-        </div>
-        <div class="pub-links">
-          <a href="https://www.canva.com/magic-layers/" target="_blank" rel="noopener noreferrer">Project</a>
-        </div>
+      <h3 class="group">Layered Visual Generation</h3>
+      <div class="pub-list">
+        <article class="pub">
+          <h3 class="pub-title">ART: Anonymous Region Transformer for Variable Multi-Layer Transparent Image Generation</h3>
+          <p class="pub-authors"><span class="me">Y. Pu</span>*, Y. Zhao*, Z. Tang, et al.</p>
+          <p class="pub-meta"><span class="venue">CVPR 2025</span></p>
+        </article>
+        <article class="pub">
+          <h3 class="pub-title">Masked Region Transformer for Layered Image Generation and Editing at Scale</h3>
+          <p class="pub-authors">Z. Tang, J. Chen, ..., <span class="me">Y. Pu</span>, et al.</p>
+          <p class="pub-meta"><span class="venue">CVPR 2026</span></p>
+        </article>
       </div>
-    </div>
-  </section>
 
-  <!-- PUBLICATIONS -->
-  <section id="publications">
-    <h2>Selected Publications</h2>
-    <p class="equal-note">* denotes equal contribution.</p>
+      <h3 class="group">Foundation Model Architecture</h3>
+      <div class="pub-list">
+        <article class="pub">
+          <h3 class="pub-title">Linear Differential Vision Transformer: Learning Visual Contrasts via Pairwise Differentials</h3>
+          <p class="pub-authors"><span class="me">Y. Pu</span>*, J. Ying*, T. Ye, et al.</p>
+          <p class="pub-meta"><span class="venue">NeurIPS 2025</span></p>
+        </article>
+        <article class="pub">
+          <h3 class="pub-title">Efficient Diffusion Transformer with Step-wise Dynamic Attention Mediators</h3>
+          <p class="pub-authors"><span class="me">Y. Pu</span>*, Z. Xia*, J. Guo*, et al.</p>
+          <p class="pub-meta"><span class="venue">ECCV 2024</span></p>
+        </article>
+        <article class="pub">
+          <h3 class="pub-title">Bridging the Divide: Reconsidering Softmax and Linear Attention</h3>
+          <p class="pub-authors">D. Han*, <span class="me">Y. Pu</span>*, Z. Xia, et al.</p>
+          <p class="pub-meta"><span class="venue">NeurIPS 2024</span></p>
+        </article>
+        <article class="pub">
+          <h3 class="pub-title">Latency-aware Spatial-wise Dynamic Networks</h3>
+          <p class="pub-authors">Y. Han*, Z. Yuan*, <span class="me">Y. Pu</span>*, et al.</p>
+          <p class="pub-meta"><span class="venue">NeurIPS 2022</span></p>
+        </article>
+        <article class="pub">
+          <h3 class="pub-title">Learning to Weight Samples for Dynamic Early-Exiting Networks</h3>
+          <p class="pub-authors">Y. Han*, <span class="me">Y. Pu</span>*, Z. Lai, et al.</p>
+          <p class="pub-meta"><span class="venue">ECCV 2022</span></p>
+        </article>
+      </div>
 
-    <div class="pub-section-label">Layered Visual Generation</div>
+      <h3 class="group">Object Detection</h3>
+      <div class="pub-list">
+        <article class="pub">
+          <h3 class="pub-title">Rank-DETR for High Quality Object Detection</h3>
+          <p class="pub-authors"><span class="me">Y. Pu</span>*, W. Liang*, Y. Hao*, et al.</p>
+          <p class="pub-meta"><span class="venue">NeurIPS 2023</span></p>
+        </article>
+        <article class="pub">
+          <h3 class="pub-title">Adaptive Rotated Convolution for Rotated Object Detection</h3>
+          <p class="pub-authors"><span class="me">Y. Pu</span>*, Y. Wang*, Z. Xia, et al.</p>
+          <p class="pub-meta"><span class="venue">ICCV 2023</span></p>
+        </article>
+        <article class="pub">
+          <h3 class="pub-title">GRA: Detecting Oriented Objects through Group-wise Rotating and Attention</h3>
+          <p class="pub-authors">J. Wang*, <span class="me">Y. Pu</span>*, Y. Han, et al.</p>
+          <p class="pub-meta"><span class="venue">ECCV 2024</span></p>
+        </article>
+      </div>
+    </section>
 
-    <div class="pub-item">
-      <div class="pub-title">ART: Anonymous Region Transformer for Variable Multi-Layer Transparent Image Generation</div>
-      <div class="pub-authors"><span class="me">Y. Pu</span>*, Y. Zhao*, Z. Tang, et al.</div>
-      <div class="pub-venue"><span class="venue-name">CVPR 2025</span></div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-title">Masked Region Transformer for Layered Image Generation and Editing at Scale</div>
-      <div class="pub-authors">Z. Tang, J. Chen, ..., <span class="me">Y. Pu</span>, et al.</div>
-      <div class="pub-venue"><span class="venue-name">CVPR 2026</span></div>
-    </div>
-
-    <br>
-    <div class="pub-section-label">Foundation Model Architecture</div>
-
-    <div class="pub-item">
-      <div class="pub-title">Linear Differential Vision Transformer: Learning Visual Contrasts via Pairwise Differentials</div>
-      <div class="pub-authors"><span class="me">Y. Pu</span>*, J. Ying*, T. Ye, et al.</div>
-      <div class="pub-venue"><span class="venue-name">NeurIPS 2025</span></div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-title">Efficient Diffusion Transformer with Step-wise Dynamic Attention Mediators</div>
-      <div class="pub-authors"><span class="me">Y. Pu</span>*, Z. Xia*, J. Guo*, et al.</div>
-      <div class="pub-venue"><span class="venue-name">ECCV 2024</span></div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-title">Bridging the Divide: Reconsidering Softmax and Linear Attention</div>
-      <div class="pub-authors">D. Han*, <span class="me">Y. Pu</span>*, Z. Xia, et al.</div>
-      <div class="pub-venue"><span class="venue-name">NeurIPS 2024</span></div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-title">Latency-aware Spatial-wise Dynamic Networks</div>
-      <div class="pub-authors">Y. Han*, Z. Yuan*, <span class="me">Y. Pu</span>*, et al.</div>
-      <div class="pub-venue"><span class="venue-name">NeurIPS 2022</span></div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-title">Learning to Weight Samples for Dynamic Early-Exiting Networks</div>
-      <div class="pub-authors">Y. Han*, <span class="me">Y. Pu</span>*, Z. Lai, et al.</div>
-      <div class="pub-venue"><span class="venue-name">ECCV 2022</span></div>
-    </div>
-
-    <br>
-    <div class="pub-section-label">Object Detection</div>
-
-    <div class="pub-item">
-      <div class="pub-title">Rank-DETR for High Quality Object Detection</div>
-      <div class="pub-authors"><span class="me">Y. Pu</span>*, W. Liang*, Y. Hao*, et al.</div>
-      <div class="pub-venue"><span class="venue-name">NeurIPS 2023</span></div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-title">Adaptive Rotated Convolution for Rotated Object Detection</div>
-      <div class="pub-authors"><span class="me">Y. Pu</span>*, Y. Wang*, Z. Xia, et al.</div>
-      <div class="pub-venue"><span class="venue-name">ICCV 2023</span></div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-title">GRA: Detecting Oriented Objects through Group-wise Rotating and Attention</div>
-      <div class="pub-authors">J. Wang*, <span class="me">Y. Pu</span>*, Y. Han, et al.</div>
-      <div class="pub-venue"><span class="venue-name">ECCV 2024</span></div>
-    </div>
-
-
-  </section>
-
-  <!-- AWARDS -->
-  <section id="awards">
-    <h2>Awards</h2>
-    <ul class="awards-list">
-      <li><span class="year">2025</span><span>National Scholarship for PhD Students</span></li>
-      <li><span class="year">2024</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
-      <li><span class="year">2023</span><span>Low Power Computer Vision Challenge, <strong>1st Place</strong></span></li>
-      <li><span class="year">2023</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
-      <li><span class="year">2022</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
-    </ul>
-  </section>
-
-
-</main>
-
-<footer>
-  <div class="container">
-    &copy; 2026 Yifan Pu &middot; Last updated November 2026
+    <section class="section" id="awards" aria-labelledby="awards-heading">
+      <h2 id="awards-heading">Awards</h2>
+      <ul class="awards">
+        <li><span class="year">2025</span><span>National Scholarship for PhD Students</span></li>
+        <li><span class="year">2024</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
+        <li><span class="year">2023</span><span>Low Power Computer Vision Challenge, <strong>1st Place</strong></span></li>
+        <li><span class="year">2023</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
+        <li><span class="year">2022</span><span>Tsinghua University Graduate Comprehensive Scholarship</span></li>
+      </ul>
+    </section>
   </div>
-</footer>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Yifan Pu</span>
+      <span>Last updated November 2026</span>
+    </div>
+  </footer>
 </body>
 </html>
