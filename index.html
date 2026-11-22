@@ -81,18 +81,8 @@
       justify-content: space-between;
       gap: 16px;
     }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      flex: none;
-      white-space: nowrap;
-      color: var(--text);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
+    .brand { color: var(--text); font-weight: 600; letter-spacing: -0.01em; }
     .brand:hover { color: var(--text); text-decoration: none; }
-    .logo { width: 28px; height: 28px; display: block; }
     .nav { display: flex; align-items: center; gap: 2px; }
     .nav a {
       color: var(--text-2);
@@ -217,14 +207,7 @@
 
     @media (max-width: 640px) {
       :root { --fs: 15.5px; }
-      .topbar-inner {
-        height: auto;
-        min-height: 52px;
-        flex-wrap: wrap;
-        padding: 8px 16px;
-        row-gap: 4px;
-      }
-      .logo { width: 26px; height: 26px; }
+      .topbar-inner { padding: 0 16px; height: 52px; }
       .nav a { padding: 6px 8px; font-size: 14.5px; }
       .layout { padding: 32px 20px 16px; }
       .name { font-size: 26px; }
@@ -243,7 +226,7 @@
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="/"><img class="logo" src="logo.svg" alt="" width="28" height="28">Yifan Pu</a>
+      <a class="brand" href="/">Yifan Pu</a>
       <nav class="nav" aria-label="Main">
         <a href="#about">Home</a>
         <a href="#projects">Projects</a>
